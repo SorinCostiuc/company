@@ -8,7 +8,6 @@ public class CompanyCreateDto {
     private String phoneNumber;
 
 
-
     public String getName() {
         return name;
     }

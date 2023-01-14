@@ -1,6 +1,9 @@
 package com.sda.company.service;
 
 
-public interface CompanyService {
+import com.sda.company.dto.CompanyCreateDto;
+import com.sda.company.dto.CompanyInfoDto;
 
+public interface CompanyService {
+    CompanyInfoDto createCompany(CompanyCreateDto companyCreateDto);
 }
