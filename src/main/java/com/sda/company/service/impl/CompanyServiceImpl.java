@@ -22,9 +22,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public CompanyInfoDto createCompany(CompanyCreateDto companyCreateDto) {
-        Company company = companyRepository.save(CompanyConvertor.createDtoToEntity(companyCreateDto));
-        CompanyInfoDto companyInfoDto = CompanyConvertor.entityToInfoDto(company);
+//        Company company = companyRepository.save(CompanyConvertor.createDtoToEntity(companyCreateDto));
+//        CompanyInfoDto companyInfoDto = CompanyConvertor.entityToInfoDto(company);
+//
+//        return companyInfoDto;
 
-        return companyInfoDto;
+        return CompanyConvertor.entityToInfoDto(companyRepository.save(CompanyConvertor.createDtoToEntity(companyCreateDto)));
     }
 }
