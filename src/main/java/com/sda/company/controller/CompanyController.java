@@ -2,14 +2,15 @@ package com.sda.company.controller;
 
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
+import com.sda.company.dto.CompanyShortInfoDto;
 import com.sda.company.service.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/company")
@@ -27,6 +28,16 @@ public class CompanyController {
         return ResponseEntity.ok(companyInfoDto);
 
 //        return ResponseEntity.ok(companyService.createCompany(companyCreateDto)) -> alternative
+    }
+
+    @GetMapping("/getAllCompanies")
+    public ResponseEntity<List<CompanyShortInfoDto>> getAllCompanies() {
+        List<CompanyShortInfoDto> allCompanies = companyService.getAllCompanies();
+
+        return ResponseEntity.ok(allCompanies);
+
+        //return ResponseEntity.ok(companyService.getAllCompanies());   -> alternative
+
     }
 
 }

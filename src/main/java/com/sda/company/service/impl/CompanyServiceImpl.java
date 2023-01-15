@@ -4,11 +4,15 @@ import com.sda.company.convertor.CompanyConvertor;
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 //import com.sda.company.model.Company;
+import com.sda.company.dto.CompanyShortInfoDto;
 import com.sda.company.repository.CompanyRepository;
 import com.sda.company.service.CompanyService;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -30,4 +34,14 @@ public class CompanyServiceImpl implements CompanyService {
         //alternative
         return CompanyConvertor.entityToInfoDto(companyRepository.save(CompanyConvertor.createDtoToEntity(companyCreateDto)));
     }
+
+    @Override
+    public List<CompanyShortInfoDto> getAllCompanies() {
+        List<CompanyShortInfoDto> companyShortInfoDto = new ArrayList<>();
+        companyRepository.findAll().forEach(company -> companyShortInfoDto.add(CompanyConvertor.entityToShortInfoDto(company)));
+
+        return companyShortInfoDto;
+    }
+
+
 }

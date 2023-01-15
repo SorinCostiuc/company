@@ -2,6 +2,7 @@ package com.sda.company.convertor;
 
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
+import com.sda.company.dto.CompanyShortInfoDto;
 import com.sda.company.model.Company;
 
 public class CompanyConvertor {
@@ -27,5 +28,13 @@ public class CompanyConvertor {
         companyInfoDto.setId(company.getId());
 
         return companyInfoDto;
+    }
+
+    public static CompanyShortInfoDto entityToShortInfoDto(Company company) {
+        CompanyShortInfoDto companyShortInfoDto = new CompanyShortInfoDto();
+        companyShortInfoDto.setName(company.getName());
+        companyShortInfoDto.setRegistrationNumber(company.getRegistrationNumber());
+
+        return companyShortInfoDto;
     }
 }
