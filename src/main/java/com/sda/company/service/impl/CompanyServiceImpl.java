@@ -5,6 +5,7 @@ import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 //import com.sda.company.model.Company;
 import com.sda.company.dto.CompanyShortInfoDto;
+import com.sda.company.model.Company;
 import com.sda.company.repository.CompanyRepository;
 import com.sda.company.service.CompanyService;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -43,5 +45,14 @@ public class CompanyServiceImpl implements CompanyService {
         return companyShortInfoDto;
     }
 
+    @Override
+    public Optional<CompanyInfoDto> findCompanyByName(String name) {
+        Optional<Company> company = companyRepository.findByName(name);
+        CompanyInfoDto companyInfoDto = null;
+        if (company.isPresent()) {
+            companyInfoDto = CompanyConvertor.entityToInfoDto(company.get());
+        }
+        return Optional.ofNullable(companyInfoDto);
+    }
 
 }

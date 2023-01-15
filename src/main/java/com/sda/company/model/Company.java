@@ -8,9 +8,9 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(unique = true)
     private String name;
-    @Column
+    @Column(unique = true)
     private Long registrationNumber;
     @Column
     private String email;

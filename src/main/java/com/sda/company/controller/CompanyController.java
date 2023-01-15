@@ -3,6 +3,7 @@ package com.sda.company.controller;
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.dto.CompanyShortInfoDto;
+import com.sda.company.model.Company;
 import com.sda.company.service.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/company")
@@ -40,4 +42,10 @@ public class CompanyController {
 
     }
 
+    @GetMapping("/findCompanyByName")
+    public ResponseEntity<CompanyInfoDto> getCompanyByName(@RequestParam String name) {
+        Optional<CompanyInfoDto> companyInfoDto = companyService.findCompanyByName(name);
+
+        return ResponseEntity.of(companyInfoDto);
+    }
 }
