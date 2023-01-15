@@ -3,6 +3,7 @@ package com.sda.company.controller;
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.service.CompanyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,9 +22,11 @@ public class CompanyController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CompanyInfoDto> createCompany(@RequestBody CompanyCreateDto companyCreateDto) {
+    public ResponseEntity<CompanyInfoDto> createCompany(@RequestBody @Valid CompanyCreateDto companyCreateDto) {
         CompanyInfoDto companyInfoDto = companyService.createCompany(companyCreateDto);
         return ResponseEntity.ok(companyInfoDto);
+
+//        return ResponseEntity.ok(companyService.createCompany(companyCreateDto)) -> alternative
     }
 
 }

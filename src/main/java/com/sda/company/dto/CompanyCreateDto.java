@@ -1,8 +1,18 @@
 package com.sda.company.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class CompanyCreateDto {
+    @NotBlank(message = "Company name is mandatory")
     private String name;
+    @NotNull(message = "Registration number cannot be null")
+    @Min(value = 100000000)
     private Long registrationNumber;
+    @Email(message = "Invalid email")
+    @NotBlank(message = "Field cannot be empty")
     private String email;
     private String address;
     private String phoneNumber;

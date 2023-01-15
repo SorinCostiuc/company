@@ -3,7 +3,7 @@ package com.sda.company.service.impl;
 import com.sda.company.convertor.CompanyConvertor;
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
-import com.sda.company.model.Company;
+//import com.sda.company.model.Company;
 import com.sda.company.repository.CompanyRepository;
 import com.sda.company.service.CompanyService;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,7 @@ public class CompanyServiceImpl implements CompanyService {
 //
 //        return companyInfoDto;
 
+        //alternative
         return CompanyConvertor.entityToInfoDto(companyRepository.save(CompanyConvertor.createDtoToEntity(companyCreateDto)));
     }
 }
