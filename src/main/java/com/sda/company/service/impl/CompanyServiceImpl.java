@@ -55,4 +55,10 @@ public class CompanyServiceImpl implements CompanyService {
         return Optional.ofNullable(companyInfoDto);
     }
 
+    @Override
+    public void generateCompanies(List<Company> companies) {
+        companyRepository.saveAll(companies);
+        System.out.println(companies.size() + " companies were generated");
+    }
+
 }
