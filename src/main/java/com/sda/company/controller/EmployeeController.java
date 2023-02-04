@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/employee")
+@ControllerAdvice
 public class EmployeeController {
     private final EmployeeService employeeService;
     private final CustomFakerEmployee customFakerEmployee;

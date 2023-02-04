@@ -4,8 +4,8 @@ import com.sda.company.convertor.EmployeeConvertor;
 import com.sda.company.dto.EmployeeCreateDto;
 import com.sda.company.dto.EmployeeInfoDto;
 import com.sda.company.dto.EmployeeShortInfoDto;
-import com.sda.company.exception.CompanyNotFoundException;
-import com.sda.company.exception.EmployeeNotFoundException;
+import com.sda.company.exception.CompanyException;
+import com.sda.company.exception.EmployeeException;
 import com.sda.company.model.Company;
 import com.sda.company.model.Employee;
 import com.sda.company.repository.CompanyRepository;
@@ -14,6 +14,7 @@ import com.sda.company.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -65,9 +66,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeInfoDto employPersonToCompany(Integer companyId, Integer employeeId) {
         Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new CompanyNotFoundException(companyId));
+                .orElseThrow(() -> new CompanyException(MessageFormat.format("Could not find company with id: {0}", companyId)));
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new EmployeeNotFoundException(employeeId));
+                .orElseThrow(() -> new EmployeeException(MessageFormat.format("Could not find employee with id: {0}", employeeId)));
         employee.setCompany(company);
 
         return EmployeeConvertor.entityToInfoDto(employeeRepository.save(employee));
@@ -76,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void layOffEmployee(Integer employeeId) {
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new EmployeeNotFoundException(employeeId));
+                .orElseThrow(() -> new EmployeeException(MessageFormat.format("Could not find employee with id: {0}", employeeId)));
         Company company = employee.getCompany();
         company.getCompanyEmployeeList().remove(employee);
         companyRepository.save(company);
@@ -88,6 +89,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        awful logic :D
 //        Optional<Company> company = companyRepository.findById(companyId);
 //        return company.map(Company::getCompanyEmployeeList).orElse(Collections.emptyList());
+//        correct logic:
         List<Employee> employees = employeeRepository.findAllByCompanyId(companyId);
         List<EmployeeShortInfoDto> response = new ArrayList<>();
         employees.forEach(employee ->
@@ -95,7 +97,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return response;
     }
-
 
     @Override
     public void updateEmployee(Integer id) {

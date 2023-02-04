@@ -4,8 +4,6 @@ import com.sda.company.components.CustomFakerCompany;
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.dto.CompanyShortInfoDto;
-import com.sda.company.dto.EmployeeShortInfoDto;
-import com.sda.company.model.Employee;
 import com.sda.company.service.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/company")
+@ControllerAdvice
 public class CompanyController {
     private final CompanyService companyService;
     private final CustomFakerCompany customFakerCompany;
@@ -45,9 +44,9 @@ public class CompanyController {
 
     @GetMapping("/findCompanyByName")
     public ResponseEntity<CompanyInfoDto> getCompanyByName(@RequestParam String name) {
-        Optional<CompanyInfoDto> companyInfoDto = companyService.findCompanyByName(name);
+        CompanyInfoDto companyInfoDto = companyService.findCompanyByName(name);
 
-        return ResponseEntity.of(companyInfoDto);
+        return ResponseEntity.ok(companyInfoDto);
     }
 
     @GetMapping("/generateCompanies")

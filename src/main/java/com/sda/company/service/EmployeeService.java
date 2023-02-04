@@ -23,6 +23,7 @@ public interface EmployeeService {
     void layOffEmployee(Integer employeeId);
 
     void updateEmployee(Integer id);
+
     Optional<Company> getEmployeePlaceOfWork(Integer id);
 
     List<EmployeeShortInfoDto> getAllEmployeesFromCompany(Integer companyId);

@@ -7,6 +7,7 @@ import com.sda.company.dto.CompanyInfoDto;
 //import com.sda.company.model.Company;
 import com.sda.company.dto.CompanyShortInfoDto;
 import com.sda.company.dto.EmployeeShortInfoDto;
+import com.sda.company.exception.CompanyException;
 import com.sda.company.model.Company;
 import com.sda.company.model.Employee;
 import com.sda.company.repository.CompanyRepository;
@@ -53,13 +54,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Optional<CompanyInfoDto> findCompanyByName(String name) {
-        Optional<Company> company = companyRepository.findByName(name);
-        CompanyInfoDto companyInfoDto = null;
-        if (company.isPresent()) {
-            companyInfoDto = CompanyConvertor.entityToInfoDto(company.get());
-        }
-        return Optional.ofNullable(companyInfoDto);
+    public CompanyInfoDto findCompanyByName(String name) {
+        Company company = companyRepository.findByName(name)
+                .orElseThrow(() -> new CompanyException("Company with name " + name + " not found"));
+
+        return CompanyConvertor.entityToInfoDto(company);
     }
 
     @Override
