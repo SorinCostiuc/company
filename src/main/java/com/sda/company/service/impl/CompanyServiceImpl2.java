@@ -15,24 +15,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("test_qualifier_companyServiceImpl")
-public class CompanyServiceImpl implements CompanyService {
+@Service
+public class CompanyServiceImpl2 implements CompanyService {
     //    @Autowired //field injection -> not recommended because we do not have control on how java instantiate the classes
     private final CompanyRepository companyRepository;
 
     //    constructor injection
     @Autowired
-    public CompanyServiceImpl(CompanyRepository companyRepository) {
+    public CompanyServiceImpl2(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
 
     public CompanyInfoDto createCompany(CompanyCreateDto companyCreateDto) {
-//        Company company = companyRepository.save(CompanyConvertor.createDtoToEntity(companyCreateDto));
-//        CompanyInfoDto companyInfoDto = CompanyConvertor.entityToInfoDto(company);
-//
-//        return companyInfoDto;
 
-        //alternative
         return CompanyConvertor.entityToInfoDto(companyRepository.save(CompanyConvertor.createDtoToEntity(companyCreateDto)));
     }
 

@@ -5,24 +5,32 @@ import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.dto.CompanyShortInfoDto;
 import com.sda.company.service.CompanyService;
+import com.sda.company.service.impl.CompanyServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/company")
 @ControllerAdvice
 public class CompanyController {
     private final CompanyService companyService;
+
+    //private final CompanyService companyService2;
     private final CustomFakerCompany customFakerCompany;
 
+
+
     @Autowired
-    public CompanyController(CompanyService companyService, CustomFakerCompany customFakerCompany) {
+    public CompanyController(@Qualifier("test_qualifier_companyServiceImpl") CompanyService companyService,
+                             //@Qualifier("companyServiceImpl2")CompanyService companyService2,
+                             CustomFakerCompany customFakerCompany) {
         this.companyService = companyService;
+        //this.companyService2 = companyService2;
         this.customFakerCompany = customFakerCompany;
     }
 
