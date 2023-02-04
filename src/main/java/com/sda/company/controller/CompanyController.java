@@ -5,7 +5,6 @@ import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.dto.CompanyShortInfoDto;
 import com.sda.company.service.CompanyService;
-import com.sda.company.service.impl.CompanyServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,8 +21,6 @@ public class CompanyController {
 
     //private final CompanyService companyService2;
     private final CustomFakerCompany customFakerCompany;
-
-
 
     @Autowired
     public CompanyController(@Qualifier("test_qualifier_companyServiceImpl") CompanyService companyService,
