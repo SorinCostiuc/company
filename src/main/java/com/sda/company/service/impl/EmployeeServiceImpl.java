@@ -78,9 +78,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void layOffEmployee(Integer employeeId) {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new EmployeeException(MessageFormat.format("Could not find employee with id: {0}", employeeId)));
-        Company company = employee.getCompany();
-        company.getCompanyEmployeeList().remove(employee);
-        companyRepository.save(company);
+        employee.setCompany(null);
         employeeRepository.save(employee);
     }
 
