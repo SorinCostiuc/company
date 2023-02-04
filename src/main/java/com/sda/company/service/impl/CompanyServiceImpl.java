@@ -1,18 +1,23 @@
 package com.sda.company.service.impl;
 
 import com.sda.company.convertor.CompanyConvertor;
+import com.sda.company.convertor.EmployeeConvertor;
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 //import com.sda.company.model.Company;
 import com.sda.company.dto.CompanyShortInfoDto;
+import com.sda.company.dto.EmployeeShortInfoDto;
 import com.sda.company.model.Company;
+import com.sda.company.model.Employee;
 import com.sda.company.repository.CompanyRepository;
+import com.sda.company.repository.EmployeeRepository;
 import com.sda.company.service.CompanyService;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +25,13 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService {
     //    @Autowired //field injection -> not recommended because we do not have control on how java instantiate the classes
     private final CompanyRepository companyRepository;
+    private final EmployeeRepository employeeRepository;
 
     //    constructor injection
     @Autowired
-    public CompanyServiceImpl(CompanyRepository companyRepository) {
+    public CompanyServiceImpl(CompanyRepository companyRepository, EmployeeRepository employeeRepository) {
         this.companyRepository = companyRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     public CompanyInfoDto createCompany(CompanyCreateDto companyCreateDto) {

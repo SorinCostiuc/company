@@ -3,6 +3,8 @@ package com.sda.company.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Company {
     @Id
@@ -18,6 +20,9 @@ public class Company {
     private String address;
     @Column
     private String phoneNumber;
+    @Column
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    private List<Employee> companyEmployeeList;
 
     public void setId(Integer id) {
         this.id = id;
@@ -65,5 +70,13 @@ public class Company {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public List<Employee> getCompanyEmployeeList() {
+        return companyEmployeeList;
+    }
+
+    public void setCompanyEmployeeList(List<Employee> companyEmployeeList) {
+        this.companyEmployeeList = companyEmployeeList;
     }
 }

@@ -4,6 +4,8 @@ import com.sda.company.components.CustomFakerCompany;
 import com.sda.company.dto.CompanyCreateDto;
 import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.dto.CompanyShortInfoDto;
+import com.sda.company.dto.EmployeeShortInfoDto;
+import com.sda.company.model.Employee;
 import com.sda.company.service.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class CompanyController {
     }
 
     @GetMapping("/generateCompanies")
-    public ResponseEntity<String> generateCompanies(){
+    public ResponseEntity<String> generateCompanies() {
         companyService.generateCompanies(customFakerCompany.generateDummyCompanies());
 
         return ResponseEntity.ok("Companies were generated");
