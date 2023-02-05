@@ -40,6 +40,14 @@ public class CompanyServiceImpl2 implements CompanyService {
     }
 
     @Override
+    public List<CompanyInfoDto> getAllCompaniesFullInfo() {
+        List<CompanyInfoDto> companyInfoDtos = new ArrayList<>();
+        companyRepository.findAll().forEach(company -> companyInfoDtos.add(CompanyConvertor.entityToInfoDto(company)));
+
+        return companyInfoDtos;
+    }
+
+    @Override
     public CompanyInfoDto findCompanyByName(String name) {
         Company company = companyRepository.findByName(name)
                 .orElseThrow(() -> new CompanyException("Company with name " + name + " not found"));

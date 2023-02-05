@@ -11,6 +11,7 @@ public interface CompanyService {
     CompanyInfoDto createCompany(CompanyCreateDto companyCreateDto);
 
     List<CompanyShortInfoDto> getAllCompanies();
+    List<CompanyInfoDto> getAllCompaniesFullInfo();
 
     CompanyInfoDto findCompanyByName(String name);
 

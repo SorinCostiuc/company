@@ -68,6 +68,11 @@ public class SecurityConfig {
             auth.requestMatchers("/api/v1/employee/layOffEmployee").hasRole(ROLE_POWER_USER);
             auth.requestMatchers("/api/v1/employee/getEmployeesByCompanyId").hasRole(ROLE_POWER_USER);
 
+//            For THYMELEAF CONTROLLER
+            auth.requestMatchers("/start").hasRole(ROLE_USER);
+            auth.requestMatchers("/welcome").hasRole(ROLE_USER);
+            auth.requestMatchers("/showAll").hasRole(ROLE_USER);
+
         }).httpBasic();
 
         httpSecurity.csrf()
