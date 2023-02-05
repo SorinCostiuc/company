@@ -44,23 +44,37 @@ public class SecurityConfig {
                 .roles(ROLE_POWER_USER, ROLE_USER, ROLE_ADMIN)
                 .build());
 
+        inMemoryUserDetailsManager.createUser(User.withUsername("sorin")
+                .password(bCryptPasswordEncoder.encode("1234"))
+                .roles(ROLE_POWER_USER, ROLE_ADMIN)
+                .build());
+
         return inMemoryUserDetailsManager;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
+// any endpoint MUST be enumerated only once; we can control the access by using .hasRole and .hasAnyRole
         httpSecurity.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/api/v1/company/create").hasRole(ROLE_ADMIN);
+            auth.requestMatchers("/api/v1/company/create").hasAnyRole(ROLE_ADMIN, ROLE_POWER_USER);
             auth.requestMatchers("/api/v1/company/findCompanyByName").hasRole(ROLE_USER);
+            auth.requestMatchers("/api/v1/company/generateCompanies").hasRole(ROLE_POWER_USER);
             auth.requestMatchers("/api/v1/company/getAllCompanies").hasRole(ROLE_POWER_USER);
+            auth.requestMatchers("/api/v1/employee/createNewEmployee").hasRole(ROLE_POWER_USER);
+            auth.requestMatchers("/api/v1/employee/getAllEmployees").hasRole(ROLE_POWER_USER);
+            auth.requestMatchers("/api/v1/employee/findEmployeeByName").hasRole(ROLE_POWER_USER);
+            auth.requestMatchers("/api/v1/employee/generateEmployees").hasRole(ROLE_POWER_USER);
+            auth.requestMatchers("/api/v1/employee/employNewPerson").hasRole(ROLE_POWER_USER);
+            auth.requestMatchers("/api/v1/employee/layOffEmployee").hasRole(ROLE_POWER_USER);
+            auth.requestMatchers("/api/v1/employee/getEmployeesByCompanyId").hasRole(ROLE_POWER_USER);
+
         }).httpBasic();
 
         httpSecurity.csrf()
-                .disable()
-                .authorizeHttpRequests()
+                .disable().authorizeHttpRequests()
                 .and()
-                .cors().disable().authorizeHttpRequests();
+                .cors()
+                .disable().authorizeHttpRequests();
 
         return httpSecurity.build();
     }

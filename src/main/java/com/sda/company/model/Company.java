@@ -23,6 +23,10 @@ public class Company {
     @Column
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
     private List<Employee> companyEmployeeList;
+    @Column
+    private String createdBy;
+
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -78,5 +82,13 @@ public class Company {
 
     public void setCompanyEmployeeList(List<Employee> companyEmployeeList) {
         this.companyEmployeeList = companyEmployeeList;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

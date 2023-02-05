@@ -16,6 +16,7 @@ public class CompanyCreateDto {
     private String email;
     private String address;
     private String phoneNumber;
+    private String createdBy;
 
 
     public String getName() {
@@ -56,5 +57,13 @@ public class CompanyCreateDto {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

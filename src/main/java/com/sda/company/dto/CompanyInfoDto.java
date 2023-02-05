@@ -7,6 +7,7 @@ public class CompanyInfoDto {
     private String address;
     private String phoneNumber;
     private Integer id;
+    private String createdBy;
 
     public Integer getId() {
         return id;
@@ -55,4 +56,13 @@ public class CompanyInfoDto {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
 }

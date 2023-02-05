@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,9 @@ public class CompanyController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CompanyInfoDto> createCompany(@RequestBody @Valid CompanyCreateDto companyCreateDto) {
+    public ResponseEntity<CompanyInfoDto> createCompany(@RequestBody @Valid CompanyCreateDto companyCreateDto,
+                                                        Principal principal) {
+        companyCreateDto.setCreatedBy(principal.getName());
         CompanyInfoDto companyInfoDto = companyService.createCompany(companyCreateDto);
 
         return ResponseEntity.ok(companyInfoDto);
